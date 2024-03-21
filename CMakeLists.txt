@@ -15,5 +15,10 @@ add_executable(DefenceTower main.cpp
         include/EnemyFlyweight.h
         include/EnemyFlyweightRed.h
         include/EnemyFlyweightGreen.h
+        include/EnemyState.h
+        src/EnemyRed.cpp
+        include/EnemyRed.h
+        src/EnemyView.cpp
+        include/EnemyView.h
 )
 target_link_libraries(DefenceTower sfml-graphics)

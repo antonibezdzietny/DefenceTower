@@ -7,11 +7,11 @@
 EnemyFlyweight::EnemyFlyweight(  const std::string &path, float scale )
 {
     // Reserve memory for textures and sprites vector
-    textures.resize(TextureType::N_TEXTURE_TYPE);
+    textures.resize(EnemyState::N_TEXTURE_TYPE);
     for (int i = 0; i < N_TEXTURE_TYPE; ++i)
         textures[i].resize(EnemyFlyweight::N_TEXTURES_PER_TYPE);
 
-    sprites.resize(TextureType::N_TEXTURE_TYPE);
+    sprites.resize(EnemyState::N_TEXTURE_TYPE);
     for (int i = 0; i < N_TEXTURE_TYPE; ++i)
         sprites[i].resize(EnemyFlyweight::N_TEXTURES_PER_TYPE);
 
@@ -27,7 +27,7 @@ EnemyFlyweight::~EnemyFlyweight() = default;
 void EnemyFlyweight::loadTextures( const std::string &path ) {
     std::string type_name[] = {"attack", "die", "hurt", "idle", "jump", "run", "walk"};
 
-    for (int i = 0; i < EnemyFlyweight::TextureType::N_TEXTURE_TYPE; ++i)
+    for (int i = 0; i < EnemyState::N_TEXTURE_TYPE; ++i)
     {
         for(int j = 0; j < EnemyFlyweight::N_TEXTURES_PER_TYPE; ++j)
         {
@@ -44,7 +44,7 @@ void EnemyFlyweight::loadTextures( const std::string &path ) {
 }
 
 void EnemyFlyweight::loadSprites(float scale) {
-    for (int i = 0; i < EnemyFlyweight::TextureType::N_TEXTURE_TYPE; ++i)
+    for (int i = 0; i < EnemyState::N_TEXTURE_TYPE; ++i)
     {
         for(int j = 0; j < EnemyFlyweight::N_TEXTURES_PER_TYPE; ++j)
         {
@@ -57,11 +57,9 @@ void EnemyFlyweight::loadSprites(float scale) {
     }
 }
 
-sf::Sprite& EnemyFlyweight::getSprite(EnemyFlyweight::TextureType type, uint8_t n_th) {
-    if(n_th >= EnemyFlyweight::N_TEXTURES_PER_TYPE)
-        throw std::invalid_argument("Out of range 'n_th'");
-
-    return sprites[type][n_th];
+sf::Sprite& EnemyFlyweight::getSprite(EnemyState type, uint8_t n_th)
+{
+    return sprites[type][n_th%N_TEXTURES_PER_TYPE];
 }
 
 

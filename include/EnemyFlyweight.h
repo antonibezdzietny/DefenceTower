@@ -3,27 +3,16 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include "EnemyState.h"
 
 class EnemyFlyweight {
 public:
-    enum TextureType
-    {
-        ATTACK = 0,
-        DIE,
-        HURT,
-        IDLE,
-        JUMP,
-        RUN,
-        WALK,
-        N_TEXTURE_TYPE,
-    };
-
     static const int N_TEXTURES_PER_TYPE = 20;
 
 public:
     explicit EnemyFlyweight(  const std::string &path, float scale );
     ~EnemyFlyweight();
-    sf::Sprite& getSprite(TextureType type, uint8_t n_th);
+    sf::Sprite& getSprite(EnemyState type, uint8_t n_th);
 
 private:
     std::vector<std::vector<sf::Texture>> textures;

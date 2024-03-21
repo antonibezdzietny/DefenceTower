@@ -1,11 +1,13 @@
 #include <SFML/Graphics.hpp>
 #include "include/EnemyFlyweightRed.h"
 #include "include/EnemyFlyweightFactory.h"
+#include "include/EnemyView.h"
 
 int main()
 {
     EnemyFlyweightFactory eff;
     EnemyFlyweight *b = eff.getEnemyFlyweight(EnemyFlyweightFactory::EnemyGreen);
+    EnemyView ev;
 
     sf::RenderWindow window(sf::VideoMode(400, 400), "SFML works!");
     sf::CircleShape shape(100.f);
@@ -22,9 +24,11 @@ int main()
 
         window.clear();
         window.draw(shape);
-        sf::Sprite a = b->getSprite(EnemyFlyweight::WALK, 0);
+        sf::Sprite a = b->getSprite(EnemyState::IDLE, 0);
         a.setPosition(200,200);
-        window.draw(a);
+
+        ev.setSprite(a);
+        window.draw(ev);
         window.display();
     }
 
