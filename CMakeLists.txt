@@ -20,5 +20,12 @@ add_executable(DefenceTower main.cpp
         include/EnemyRed.h
         src/EnemyView.cpp
         include/EnemyView.h
+        include/EnemyRoute.h
+        src/MapData.cpp
+        include/MapData.h
 )
-target_link_libraries(DefenceTower sfml-graphics)
+
+add_library(json INTERFACE)
+target_include_directories(json INTERFACE libs)
+
+target_link_libraries(DefenceTower sfml-graphics json)

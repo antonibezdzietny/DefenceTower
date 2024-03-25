@@ -1,27 +1,33 @@
-//
-// Created by muntek on 19.03.24.
-//
-
 #ifndef DEFENCETOWER_ENEMY_H
 #define DEFENCETOWER_ENEMY_H
 
 #include <SFML/Graphics.hpp>
+#include "EnemyFlyweightFactory.h"
 #include "EnemyState.h"
+#include "EnemyRoute.h"
+#include "EnemyView.h"
 
 class Enemy {
+protected:
+    EnemyFlyweightFactory eff_;
+    EnemyRoute route_;
     sf::Vector2f position_;
     EnemyState state_;
+    EnemyState state_waiting_;
     int n_texture_frame_;
-    int16_t health_;
-    uint16_t speed_walk_;
-    uint16_t speed_run_;
-    uint16_t armor_;
+    int health_;
+    int speed_walk_;
+
+    int32_t total_time_;
+    int32_t switch_time_;
+
 public:
-    Enemy();
-    ~Enemy();
+    explicit Enemy(EnemyRoute& route, EnemyFlyweightFactory& eff);
+    virtual ~Enemy();
 
-    virtual void onHit(int damage) = 0;
 
+    void hit(int damage);
+    void update(int32_t deltaT, EnemyView &ev);
 
     // Setters
     void setState(EnemyState state);

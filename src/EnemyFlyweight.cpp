@@ -57,9 +57,9 @@ void EnemyFlyweight::loadSprites(float scale) {
     }
 }
 
-sf::Sprite& EnemyFlyweight::getSprite(EnemyState type, uint8_t n_th)
+sf::Sprite* EnemyFlyweight::getSprite(EnemyState type, uint8_t n_th)
 {
-    return sprites[type][n_th%N_TEXTURES_PER_TYPE];
+    return &sprites[type][n_th%N_TEXTURES_PER_TYPE];
 }
 
 

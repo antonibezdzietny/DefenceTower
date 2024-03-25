@@ -12,7 +12,7 @@ public:
 public:
     explicit EnemyFlyweight(  const std::string &path, float scale );
     ~EnemyFlyweight();
-    sf::Sprite& getSprite(EnemyState type, uint8_t n_th);
+    sf::Sprite* getSprite(EnemyState type, uint8_t n_th);
 
 private:
     std::vector<std::vector<sf::Texture>> textures;
